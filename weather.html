@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather</title>
+    <link rel="stylesheet" href="weather.css">
+</head>
+<body>
+    <div class="search">
+        <input type="text" placeholder="enter city name " spellcheck="false">
+        <button><img src="pngtree-vector-search-icon-png-image_320926.jpg"></button>
+        
+    </div>
+    <div class="weather">
+        <img src="weather02-512.webp" class="weather-icon">
+        <h1 class="temp">22°C</h1>
+        <h2 class="city">New york</h2>
+        <div class="details">
+            <div class="hum">
+                <img src="humidity-3d-render-icon-illustration-png.webp">
+                <div>
+                    <p class="humidity">50%</p>
+                    <p class="humidity">Humidity</p>
+                </div>
+            </div>
+            <div class="hum">
+                <img src="wind-icon-2048x1563-xzh65ux5.png"
+                <div>
+                    <p class="wind">15 km/h</p>
+                    <p class="wind">wind speed</p>
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+<script>
+    const apiKey="67d1436d3a7665df6240624a49469a26";
+    const url="https://api.openweathermap.org/data/2.5/weather?&units=metric";
+    const searchBOX= Document.querySelector(".search input");
+    const searchBtn= Document.querySelector(".search button");
+
+    async function checkweather(city){
+        const response = await fetch(url+city+`&appid=${apiKey}`);
+        var data=await response.jason();
+
+        console.log(data);
+        document.querySelector(".city").innerHTML=data.name;
+        document.querySelector(".temp").innerHTML=math.round(data.main.temp)+"°C";
+        document.querySelector(".humidity").innerHTML=data.main.humidity+"%";
+        document.querySelector(".wind").innerHTML=data.wind.speed+"km/h";
+    }
+searchBtn.addEventlistener("click",()=>{
+    checkweather(searchBOX.value);
+})
+
+
+</script>
+</body>
+</html>
